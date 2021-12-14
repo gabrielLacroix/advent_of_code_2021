@@ -21,12 +21,9 @@ if __name__ == '__main__':
         global aim
         aim += shift
 
-    funcs = [('forward', lambda i: forward(i)),
-             ('up', lambda i: aim_up(i)),
-             ('down', lambda i: aim_down(i))]
-
-    def get_func(action):
-        return get_action(action)[1]
+    funcs = {'forward': lambda i: forward(i),
+             'up': lambda i: aim_up(i),
+             'down': lambda i: aim_down(i)}
 
     def get_action(action):
         for i, (action_name, func) in enumerate(funcs):
@@ -38,7 +35,7 @@ if __name__ == '__main__':
         action_amount = line.split(' ')
         if len(action_amount) == 2:
             action, x = action_amount
-            get_func(action)(int(x))
+            funcs.get(action)(int(x))
 
     print("Depth = " + str(total_depth))
     print("Position = " + str(total_position))

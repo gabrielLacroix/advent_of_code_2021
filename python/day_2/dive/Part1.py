@@ -11,12 +11,9 @@ if __name__ == '__main__':
         global total_depth
         total_depth += depth
 
-    funcs = [('forward', lambda i: forward(i)),
-             ('up', lambda i: dive(-i)),
-             ('down', lambda i: dive(i))]
-
-    def get_func(action):
-        return get_action(action)[1]
+    funcs = {'forward': lambda i: forward(i),
+             'up': lambda i: dive(-i),
+             'down': lambda i: dive(i)}
 
     def get_action(action):
         for i, (action_name, func) in enumerate(funcs):
@@ -28,7 +25,7 @@ if __name__ == '__main__':
         action_amount = line.split(' ')
         if len(action_amount) == 2:
             action, x = action_amount
-            get_func(action)(int(x))
+            funcs.get(action)(int(x))
 
     print("Depth = " + str(total_depth))
     print("Position = " + str(total_position))
