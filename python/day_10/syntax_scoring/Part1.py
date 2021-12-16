@@ -1,10 +1,8 @@
 if __name__ == '__main__':
     data = open('input').read().split('\n')
     data.remove('')
-    print(data)
 
     openers = ['(', '[', '{', '<']
-    closers = [')', ']', '}', '>']
 
     illegal_character_scores = {')': 3, ']': 57, '}': 1197, '>': 25137, '': 0}
     opener_to_closer = {'(': ')', '[': ']', '{': '}', '<': '>'}
@@ -18,12 +16,10 @@ if __name__ == '__main__':
                 closer = expected_closer.pop()
                 if c != closer:
                     return c
-
         return ''
 
     score = 0
     for line in data:
-
         first_illegal_character = find_first_illegal_character(line)
         score += illegal_character_scores.get(first_illegal_character)
     print(score)
